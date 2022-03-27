@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import 'tachyons'; //stylesheet classes
 import CardList from './CardList';
 import { robots } from './robots';
@@ -15,6 +16,7 @@ class App extends React.Component {
         }
     }
 
+    //if this function is not in => format this=undefined
     onSearchChange = (event) => {
         this.setState({searchField: event.target.value});
     }
@@ -26,7 +28,7 @@ class App extends React.Component {
 
         return(
             <>
-                <h1 className="tc">Robot Friends</h1>
+                <h1 className="tc f1">Robot Friends</h1>
                 <SearchBox searchChange={this.onSearchChange}/>   
                 <CardList robots={filteredRobots}/>
             </>

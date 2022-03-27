@@ -11,7 +11,7 @@
 //shadow-5 box-shadow 5
 
 function Card({id, name, email}) {  
-    const set = 5;  
+    const set = 4;  
     return(
         <div className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5">
             <img alt="robots" src={`https://robohash.org/${id}?set=set${set}&100x100`} />            
