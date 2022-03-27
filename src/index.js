@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Card from './Card';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div>
+      <Card index={0}/>
+      <Card index={Number(2)}/>
+      <Card index={Number(3)}/>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
