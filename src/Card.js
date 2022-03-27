@@ -1,4 +1,3 @@
-import { robots } from './robots';
 import './Card.css';
 import 'tachyons';
 
@@ -11,8 +10,7 @@ import 'tachyons';
 //bw2 ??
 //shadow-5 box-shadow 5
 
-function Card(props) {
-    const {id, name, email} = robots[props.index];
+function Card({id, name, email}) {    
     return(
         <div className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5">
             <img alt="robots" src={`https://robohash.org/${id}?100x100`} />            

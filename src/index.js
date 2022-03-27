@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Card from './Card';
+import CardList from './CardList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <div>
-      <Card index={0}/>
-      <Card index={Number(2)}/>
-      <Card index={Number(3)}/>
+      <CardList />
     </div>
   </React.StrictMode>,
   document.getElementById('root')
