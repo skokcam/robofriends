@@ -4,6 +4,7 @@ import 'tachyons'; //stylesheet classes
 import CardList from './CardList';
 //import { robots } from './robots';
 import SearchBox from './SearchBox';
+import Scroll from './Scroll';
 
 
 class App extends React.Component {
@@ -34,14 +35,21 @@ class App extends React.Component {
         const filteredRobots = this.state.robots.filter( (robot) => {        
             return robot.name.toLowerCase().includes(this.state.searchField.toLowerCase());
             });
-
-        return(
-            <>
-                <h1 className="tc f1">Robot Friends</h1>
-                <SearchBox searchChange={this.onSearchChange}/>   
-                <CardList robots={filteredRobots}/>
-            </>
-        );
+        
+        if (this.state.robots.length === 0) {
+            return(<h1 className="tc f1">Loading...</h1>);
+        }
+        else {
+            return(
+                <>
+                    <h1 className="tc f1">Robot Friends</h1>
+                    <SearchBox searchChange={this.onSearchChange}/>
+                    <Scroll>
+                        <CardList robots={filteredRobots}/>
+                    </Scroll>
+                </>
+            );
+        }
     }
 
 }
