@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css'
 import 'tachyons'; //stylesheet classes
-import CardList from './CardList';
-//import { robots } from './robots';
-import SearchBox from './SearchBox';
-import Scroll from './Scroll';
+import CardList from '../components/CardList';
+//import { robots } from '../robots';
+import SearchBox from '../components/SearchBox';
+import Scroll from '../components/Scroll';
 
 
 class App extends React.Component {
