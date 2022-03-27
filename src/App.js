@@ -16,7 +16,8 @@ class App extends React.Component {
     }
 
     onSearchChange(event) {
-        console.log(event);
+        this.searchField = event.target.value;
+        console.log(this.searchField);
     }
 
     render() {

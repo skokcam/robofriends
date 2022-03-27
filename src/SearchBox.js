@@ -1,11 +1,13 @@
 
-const SearchBox = ( {onSearchChange} ) => {
+const SearchBox = (props) => {
+    const { searchChange } = props;   
+
     return (
         <div className="tc">
-            <input className="tc pa2 ba b--green bg-lightest-blue" 
+            <input className="pa2 ba b--green bg-lightest-blue" 
             type="search" 
             placeholder="search robots"
-            change={onSearchChange}></input>
+            onChange={searchChange}></input>
         </div>
     );
 }
