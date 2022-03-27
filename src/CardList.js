@@ -1,7 +1,6 @@
 import Card from './Card';
-import { robots } from './robots';
 
-const CardList = () => {
+const CardList = ({ robots }) => {
     const cardArray = robots.map( (robot, i) => {
         return(<Card key={robot.id} id={robot.id} name={robot.name} email={robot.email} />);
     })

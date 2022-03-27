@@ -1,5 +1,5 @@
-import './Card.css';
-import 'tachyons';
+//import './Card.css';
+//import 'tachyons';
 
 //tachyon styles
 //dib div
@@ -7,13 +7,14 @@ import 'tachyons';
 //pa3 padding 3
 //ma2 margin 2
 //grow : animation
-//bw2 ??
+//bw2 border-width: .25rem
 //shadow-5 box-shadow 5
 
-function Card({id, name, email}) {    
+function Card({id, name, email}) {  
+    const set = 5;  
     return(
         <div className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5">
-            <img alt="robots" src={`https://robohash.org/${id}?100x100`} />            
+            <img alt="robots" src={`https://robohash.org/${id}?set=set${set}&100x100`} />            
             <div>
                 <h2>{name}</h2>
                 <p>{email}</p>
