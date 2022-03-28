@@ -1,3 +1,7 @@
+# Robofriends
+
+Ok, this is not my work, this is a react tutorial by [Andrei Negaoie](https://github.com/aneagoie) for [ZTM](https://github.com/zero-to-mastery) students.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
