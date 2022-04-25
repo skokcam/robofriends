@@ -1,58 +1,71 @@
-import React,{ useState, useEffect } from 'react';
-import './App.css'
-import 'tachyons'; //stylesheet classes
+import React from 'react';
+import { connect } from 'react-redux';
+//import { useState, useEffect } from 'react';
 import CardList from '../components/CardList';
 //import { robots } from '../robots';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry';
+import 'tachyons'; //stylesheet classes
+import './App.css'
+
+import { setTextField, requestAPI } from '../actions';
+
+const robotsFetchURL = 'https://jsonplaceholder.typicode.com/users';
+const robotsFetchOptions = {};
+
+const mapStateToProps = (state) => {
+  //takes state as param and returns an object
+  return {
+    searchField: state.textFieldReducer.textField,
+		robots: state.requestAPIreducer.data,
+		isPending: state.requestAPIreducer.isPending,
+		error: state.requestAPIreducer.error
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  //returns an object
+  return { 
+		onSearchChange: (event) => dispatch(setTextField(event.target.value)),
+		onRequestRobots: () => dispatch(requestAPI(robotsFetchURL, robotsFetchOptions))
+	 }
+}
+
+class App extends React.Component {
+	//we no longer need constructor, our state is now managed by redux
+
+  componentDidMount(){
+		this.props.onRequestRobots(); //request our robots
+    console.log("componentDidMount");
+  }
+
+	render() {
+		const { searchField, onSearchChange, robots, isPending } = this.props;
+		console.log("render");
+
+		const filteredRobots = robots.filter( (robot) => {        
+				return robot.name.toLowerCase().includes(searchField.toLowerCase());
+				});
+		
+		return isPending ? 
+			(<h1 className="tc f1">Loading...</h1>) 
+			: 
+			(
+					<>
+							<h1 className="tc f1">Robot Friends</h1>
+							<SearchBox searchChange={onSearchChange} />
+							<Scroll>
+									<ErrorBoundry>
+											<CardList robots={filteredRobots} />
+									</ErrorBoundry>
+							</Scroll>
+					</>
+			);
+	}
+}
 
 /*
-class App extends React.Component {
-    
-    constructor () {
-        super();
-        this.state = {
-            robots: [],
-            searchField: ''
-        }
-        console.log("constructor");
-    }
-
-    //if this function is not in => format this=undefined
-    onSearchChange = (event) => {
-        this.setState({searchField: event.target.value});
-    }
-
-    componentDidMount(){
-        fetch("https://jsonplaceholder.typicode.com/users")
-        .then( (respose) => {return respose.json();})
-        .then( (users) => {this.setState({robots: users});});        
-        console.log("componentDidMount");
-    }
-
-    render() {
-      const {robots, searchField} = this.state;
-      console.log("render");
-      const filteredRobots = robots.filter( (robot) => {        
-          return robot.name.toLowerCase().includes(searchField.toLowerCase());
-          });
-      
-      return (robots.length) ? (
-          <>
-              <h1 className="tc f1">Robot Friends</h1>
-              <SearchBox searchChange={this.onSearchChange} />
-              <Scroll>
-                  <ErrorBoundry>
-                      <CardList robots={filteredRobots} />
-                  </ErrorBoundry>
-              </Scroll>
-          </>
-      ) : (<h1 className="tc f1">Loading...</h1>);
-    }
-}
-*/
-
 const App = ()=> {
   const [ robots, setRobots ] = useState([]);
   const [ filteredRobots, setFilteredRobots ] = useState([]);
@@ -100,5 +113,7 @@ const App = ()=> {
       </>
   ) : (<h1 className="tc f1">Loading...</h1>);
 }
-
-export default App;
+*/
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+//connect() is a higher level function that takes App as parameter and returns App
+//with this now App has subscribed to any changes in redux store

@@ -1,14 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+//redux-thunk checks if an action returns a function instead of an object
 import './index.css';
 import App from './containers/App';
+import { textFieldReducer, requestAPIreducer } from './reducers';
 import reportWebVitals from './reportWebVitals';
 
+const logger = createLogger();
+// const store = createStore(rootReducer); 
+//all reducers -> root reducer, but we have one reducer so:
+const rootReducer = combineReducers({ textFieldReducer, requestAPIreducer }); //ES6 syntax:
+//= { textFieldReducer: textFieldReducer, equestAPIreducer: equestAPIreducer } //Pre  ES6
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
+//Provider will take care of passing store to sub components
 ReactDOM.render(
   <React.StrictMode>
     <div>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </div>
   </React.StrictMode>,
   document.getElementById('root')
