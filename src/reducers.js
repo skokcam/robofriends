@@ -13,8 +13,7 @@ export const textFieldReducer = (state = initialStateText, action = {}) => {
   switch(action.type) {
     case CHANGE_TEXT_FIELD: 
       return Object.assign({}, state, {textField: action.payload});
-      //equal to (with object spread operator): 
-      //return { ...state, textField: action.payload }     
+      //return { ...state, textField: action.payload };//with object spread operator   
     default:
       return state;  
   }
@@ -29,11 +28,15 @@ const initialStateAPI = {
 export const requestAPIreducer = (state = initialStateAPI, action = {}) => {
   switch(action.type) {
     case REQUEST_API_PENDING:
-      return Object.assign({}, state, { isPending: true });
+      return { ...state, isPending: true }; 
+      //creates an empty object, copies ...spread object into it, changes supplied fields
+      //return Object.assign({}, state, { isPending: true });
     case REQUEST_API_SUCCESS:
-      return Object.assign({}, state, { data: action.payload, isPending: false });
+      return { ...state, data: action.payload, isPending: false };
+      //return Object.assign({}, state, { data: action.payload, isPending: false });
     case REQUEST_API_FAILED: 
-      return Object.assign({}, state, { error: action.payload, isPending: false });
+      return { ...state, error: action.payload, isPending: false };
+      //return Object.assign({}, state, { error: action.payload, isPending: false });
     default:
       return state;
   }
